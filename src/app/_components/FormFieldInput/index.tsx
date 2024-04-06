@@ -30,6 +30,7 @@ const FormSchema = z.object({
   ip: z.string().regex(IP_V4_ADDRESS_REGEX, {
     message: "Este campo deve seguir o formato de um endereço de IPV4.",
   }),
+  cpfFilter: z.string().transform((value) => value.replace(/\D/g, "")),
 });
 
 export function FormFields() {
@@ -40,6 +41,7 @@ export function FormFields() {
       integer: "",
       cpf: "",
       ip: "",
+      cpfFilter: "",
     },
   });
 
@@ -67,7 +69,7 @@ export function FormFields() {
         />
 
         <ControlledInput
-          label="CPF"
+          label="CPF (com expressão regular)"
           placeholder="000.000.000-00"
           control={form.control}
           name="cpf"
@@ -78,6 +80,14 @@ export function FormFields() {
           placeholder="000.000.000.000"
           control={form.control}
           name="ip"
+        />
+
+        <ControlledInput
+          label="CPF (com filtragem)"
+          placeholder="CPF"
+          control={form.control}
+          description="Campo permite todos caracteres, mas filtra para apenas números."
+          name="cpfFilter"
         />
 
         <Button type="submit">Enviar</Button>
