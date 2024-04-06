@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { ControlledInput } from "@/app/_components/ControlledInput";
+import { toast } from "@/components/ui/use-toast";
 
 const POSITIVE_NEGATIVE_INTEGER_REGEX = /^-?\d+$/;
 
@@ -43,7 +44,9 @@ export function FormFields() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    toast({
+      title: "Dados enviados.",
+    });
   }
 
   return (
@@ -77,7 +80,7 @@ export function FormFields() {
           name="ip"
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Enviar</Button>
       </form>
     </Form>
   );
